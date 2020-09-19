@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2020 a las 04:15:15
+-- Tiempo de generación: 19-09-2020 a las 04:21:01
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -83,11 +83,56 @@ CREATE TABLE `seccion` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `seccion_registro`
+--
+
+CREATE TABLE `seccion_registro` (
+  `id` int(11) NOT NULL,
+  `id_mod` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `usuario` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subforo`
+--
+
+CREATE TABLE `subforo` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `seccion` int(11) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subforo_registro`
+--
+
+CREATE TABLE `subforo_registro` (
+  `id` int(11) NOT NULL,
+  `id_mod` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `seccion` int(11) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL,
+  `usuario` int(11) NOT NULL,
+  `fecha` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tema`
 --
 
 CREATE TABLE `tema` (
   `id` int(11) NOT NULL,
+  `subforo` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `creador` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
@@ -104,6 +149,7 @@ CREATE TABLE `tema` (
 
 CREATE TABLE `tema_registro` (
   `id` int(11) NOT NULL,
+  `subforo` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `usuario` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
@@ -152,6 +198,12 @@ ALTER TABLE `seccion`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `subforo`
+--
+ALTER TABLE `subforo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tema`
 --
 ALTER TABLE `tema`
@@ -171,6 +223,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `subforo`
+--
+ALTER TABLE `subforo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
