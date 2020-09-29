@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-09-2020 a las 04:21:01
+-- Tiempo de generación: 29-09-2020 a las 20:02:24
 -- Versión del servidor: 10.4.8-MariaDB
 -- Versión de PHP: 7.3.11
 
@@ -171,6 +171,18 @@ CREATE TABLE `usuario` (
   `rango` int(11) NOT NULL,
   `creacion` date NOT NULL,
   `silenciado` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_login`
+--
+
+CREATE TABLE `usuario_login` (
+  `id` int(11) NOT NULL,
+  `token` varchar(300) NOT NULL,
+  `fecha_token` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
