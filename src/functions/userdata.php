@@ -71,5 +71,13 @@ class UserData extends Database
         $this->silenciado = $elemento[5];
         return true;
     }
+    public function cerrarSesion()
+    {
+        if (!isset($this->id_usuario, $this->token)) return true;
+        $stmt = $this->mysqli->prepare("DELETE FROM ".$this->prefijo."usuario_login WHERE id=? AND token=?");
+        $stmt->bind_param("is", $this->id_usuario, $this->token);
+        $stmt->execute();
+        return true;
+    }
 }
 ?>
