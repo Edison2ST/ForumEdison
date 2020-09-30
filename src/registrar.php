@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION["usuario"], $_SESSION["contrasena"])) header("Location: index.php");
+if (isset($_SESSION["usuario_id"], $_SESSION["token"])) header("Location: index.php");
 else
 {
     include "functions/modificar_usuario.php";
