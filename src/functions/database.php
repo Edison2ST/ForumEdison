@@ -6,7 +6,7 @@ class Database
     public $error = "";
     public function __construct()
     {
-        require_once "database_preload.php";
+        require "database_preload.php";
         $this->mysqli = new mysqli($host, $usuario_db, $contrasena_db);
         $this->mysqli->set_charset('utf8mb4');
         $this->mysqli->select_db($basededatos);
