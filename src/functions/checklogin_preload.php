@@ -1,7 +1,7 @@
 <?php
-require_once "userdata.php";
+require_once "usuario.php";
 session_start();
-$userdata = new UserData();
+$userdata = new Usuario();
 if (isset($_SESSION["usuario_id"], $_SESSION["token"]))
 {
     $resultado = $userdata->establecerToken($_SESSION["usuario_id"], $_SESSION["token"]);

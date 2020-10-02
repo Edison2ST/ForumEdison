@@ -3,8 +3,8 @@ session_start();
 if (isset($_SESSION["usuario_id"], $_SESSION["token"])) header("Location: index.php");
 else
 {
-    require_once "functions/userdata.php";
-    $userdata = new UserData();
+    require_once "functions/usuario.php";
+    $userdata = new Usuario();
     if (isset($_POST["usuario"], $_POST["contrasena"]))
     {
         $resultado = $userdata->comprobarIngreso($_POST["usuario"], $_POST["contrasena"]);

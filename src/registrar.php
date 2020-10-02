@@ -3,8 +3,8 @@ session_start();
 if (isset($_SESSION["usuario_id"], $_SESSION["token"])) header("Location: index.php");
 else
 {
-    require_once "functions/modificar_usuario.php";
-    $modificar_usuario = new ModificarUsuario();
+    require_once "functions/usuario.php";
+    $modificar_usuario = new Usuario();
     if (isset($_POST["usuario"], $_POST["contrasena"]))
     {
         $resultado = $modificar_usuario->registrarUsuario($_POST["usuario"], $_POST["contrasena"]);
