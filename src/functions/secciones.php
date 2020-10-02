@@ -1,6 +1,6 @@
 <?php
-require_once "database.php";
-class Seccion extends Database
+require_once "usuario.php";
+class Seccion extends Usuario
 {
     public $id;
     public $nombre;
@@ -49,6 +49,19 @@ class Seccion extends Database
             $resultado[] = [$this->id, $this->nombre, $this->eliminado, $this->subforos];
         }
         return $resultado;
+    }
+    public function anadirSeccion($nombre)
+    {
+        if ($this->rango !== 2) return $this->establecerError("El usuario no posee los permisos suficientes para realizar esta acción");
+        if (strlen($nombre) < 3 || strlen($nombre) > 30) return $this->establecerError("El nombre de la sección debe contener entre 3 y 30 caracteres");
+        $stmt = $this->mysqli->prepare("INSERT INTO ".$this->prefijo."seccion(nombre,eliminado) VALUES(?,0)");
+        $stmt->bind_param("s", $nombre);
+        $stmt->execute();
+        $id_seccion = $stmt->insert_id;
+        $stmt = $this->mysqli->prepare("INSERT INTO ".$this->prefijo."seccion_registro(id,id_mod,nombre,eliminado,fecha,usuario) VALUES(?,1,?,0,'".date("Y-m-d H:i:s")."',?)");
+        $stmt->bind_param("iis", $id_seccion, $nombre, $this->id_usuario);
+        $stmt->execute();
+        return true;
     }
 }
 ?>
