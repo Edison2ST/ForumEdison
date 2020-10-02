@@ -1,8 +1,8 @@
 <?php
-include "functions/checklogin_preload.php";
+require_once "functions/checklogin_preload.php";
 $estado = ["foro" => 1];
-include "functions/navbar_preload.php";
-include "functions/secciones.php";
+require_once "functions/navbar_preload.php";
+require_once "functions/secciones.php";
 $secciones = new Seccion();
 $secciones = $secciones->listarTodo();
 $contenidos = [];
@@ -18,4 +18,4 @@ foreach ($secciones as $seccion)
     $contenidos[] = ["titulo" => $seccion[1].($esAdministrador ? " <a href=\"editar_seccion.php?id=".$seccion[0]."\">Editar</a>" : ""), "divs" => $divs];
 }
 if ($esAdministrador) $contenidos[] = ["titulo" => "<a href=\"anadir_seccion.php\">Añadir sección</a>", "divs" => []];
-include "template/default.phtml";
+require_once "template/default.phtml";

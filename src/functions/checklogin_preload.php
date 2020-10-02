@@ -1,5 +1,5 @@
 <?php
-include "userdata.php";
+require_once "userdata.php";
 session_start();
 $userdata = new UserData();
 if (isset($_SESSION["usuario_id"], $_SESSION["token"]))

@@ -1,5 +1,5 @@
 <?php
-include "functions/userdata.php";
+require_once "functions/userdata.php";
 session_start();
 if (!isset($_SESSION["usuario_id"], $_SESSION["token"])) header("Location: index.php");
 else

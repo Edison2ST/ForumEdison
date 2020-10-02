@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION["usuario_id"], $_SESSION["token"])) header("Location: index.php");
 else
 {
-    include "functions/userdata.php";
+    require_once "functions/userdata.php";
     $userdata = new UserData();
     if (isset($_POST["usuario"], $_POST["contrasena"]))
     {
@@ -18,10 +18,10 @@ else
     }
     $tipo_navbar = "logout";
     $estado = ["iniciar_sesion" => 1];
-    include "functions/navbar_preload.php";
+    require_once "functions/navbar_preload.php";
     $contenidos = [["titulo" => "Iniciar sesión<form method=\"post\" action=\"?\">", "divs" => [[
         "titulo" => "",
         "texto" => "Usuario: <input type=\"text\" name=\"usuario\"><br>Contraseña: <input type=\"password\" name=\"contrasena\"><br><input type=\"submit\" value=\"Iniciar sesión\"></form>"
     ]]]];
-    include "template/default.phtml";
+    require_once "template/default.phtml";
 }

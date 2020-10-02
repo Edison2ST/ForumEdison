@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION["usuario_id"], $_SESSION["token"])) header("Location: index.php");
 else
 {
-    include "functions/modificar_usuario.php";
+    require_once "functions/modificar_usuario.php";
     $modificar_usuario = new ModificarUsuario();
     if (isset($_POST["usuario"], $_POST["contrasena"]))
     {
@@ -13,11 +13,11 @@ else
     }
     $tipo_navbar = "logout";
     $estado = ["registrar" => 1];
-    include "functions/navbar_preload.php";
+    require_once "functions/navbar_preload.php";
     $contenidos = [["titulo" => "Registrarse<form method=\"post\" action=\"?\">", "divs" => [[
         "titulo" => "",
         "texto" => "Usuario: <input type=\"text\" name=\"usuario\"><br>Contraseña: <input type=\"password\" name=\"contrasena\"><br><input type=\"submit\" value=\"Registrarse\"></form>"
     ]]]];
-    include "template/default.phtml";
+    require_once "template/default.phtml";
 }
 ?>

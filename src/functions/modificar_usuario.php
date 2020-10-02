@@ -1,5 +1,5 @@
 <?php
-include "database.php";
+require_once "database.php";
 class ModificarUsuario extends Database
 {
     private function comprobarUsuario($nombre)
