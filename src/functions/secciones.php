@@ -80,5 +80,22 @@ class Seccion extends Usuario
         $stmt->execute();
         return true;
     }
+    public function eliminarSeccion($nombre)
+    {
+        if ($this->rango !== 2) return $this->establecerError("El usuario no posee los permisos suficientes para realizar esta acción");
+        if ($nombre !== $this->nombre) return $this->establecerError("El nombre otorgado no coincide con el nombre de la sección (se distinguen mayúsculas y minúsculas)");
+        $stmt = $this->mysqli->prepare("UPDATE ".$this->prefijo."seccion SET eliminado=1 WHERE id=?");
+        $stmt->bind_param("i", $this->id);
+        $stmt->execute();
+        $stmt = $this->mysqli->prepare("SELECT id_mod FROM ".$this->prefijo."seccion_registro WHERE id=? ORDER BY id_mod DESC LIMIT 1");
+        $stmt->bind_param("i", $this->id);
+        $stmt->execute();
+        $consulta = $stmt->get_result();
+        $next_idmod = $consulta->num_rows === 0 ? 1 : $consulta->fetch_row()[0] + 1;
+        $stmt = $this->mysqli->prepare("INSERT INTO ".$this->prefijo."seccion_registro(id,id_mod,nombre,eliminado,fecha,usuario) VALUES(?,?,?,1,'".date("Y-m-d H:i:s")."',?)");
+        $stmt->bind_param("iisi", $this->id, $next_idmod, $nombre, $this->id_usuario);
+        $stmt->execute();
+        return true;
+    }
 }
 ?>

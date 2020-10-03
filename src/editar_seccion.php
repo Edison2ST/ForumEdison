@@ -21,10 +21,20 @@ elseif (isset($_GET["id"]))
             if ($resultado) $anuncio = ["Sección editada exitosamente", ""];
             else $anuncio = ["Error al intentar editar la sección", $seccion->error];
         }
+        elseif (isset($_POST["eliminar_nombre"]))
+        {
+            $resultado = $seccion->eliminarSeccion($_POST["eliminar_nombre"]);
+            if ($resultado) $anuncio = ["Sección eliminada exitosamente", ""];
+            else $anuncio = ["Error al intentar eliminar la sección", $seccion->error];
+        }
         $contenidos = [["titulo" => "Editar sección<form method=\"post\" action=\"?id=".urlencode($_GET["id"])."\">", "divs" => [[
             "titulo" => "",
-            "texto" => "Nombre de la sección: <input type=\"text\" name=\"nombre\"><br><input type=\"submit\" value=\"Editar sección\"></form>"
-        ]]]];
+            "texto" => "Nombre de la sección: <input type=\"text\" name=\"nombre\"><br><input type=\"submit\" value=\"Editar sección\"></form><form method=\"post\" action=\"?id=".urlencode($_GET["id"])."\">"
+        ],[
+            "titulo" => "Eliminar la sección",
+            "texto" => "Para confirmar que desea eliminar esta sección, introduzca el nombre actual de esta sección: <input type=\"text\" name=\"eliminar_nombre\"><input type=\"submit\" value=\"Eliminar sección\"></form>"
+        ]
+        ]]];
     }
     require_once "template/default.phtml";
 }
