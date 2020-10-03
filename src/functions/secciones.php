@@ -76,7 +76,7 @@ class Seccion extends Usuario
         $consulta = $stmt->get_result();
         $next_idmod = $consulta->num_rows === 0 ? 1 : $consulta->fetch_row()[0] + 1;
         $stmt = $this->mysqli->prepare("INSERT INTO ".$this->prefijo."seccion_registro(id,id_mod,nombre,eliminado,fecha,usuario) VALUES(?,?,?,0,'".date("Y-m-d H:i:s")."',?)");
-        $stmt->bind_param("iiss", $this->id, $next_idmod, $nombre, $this->id_usuario);
+        $stmt->bind_param("iisi", $this->id, $next_idmod, $nombre, $this->id_usuario);
         $stmt->execute();
         return true;
     }
