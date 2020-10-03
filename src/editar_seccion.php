@@ -21,7 +21,7 @@ elseif (isset($_GET["id"]))
             if ($resultado) $anuncio = ["Sección editada exitosamente", ""];
             else $anuncio = ["Error al intentar editar la sección", $seccion->error];
         }
-        $contenidos = [["titulo" => "Editar sección<form method=\"post\" action=\"?id=".$_GET["id"]."\">", "divs" => [[
+        $contenidos = [["titulo" => "Editar sección<form method=\"post\" action=\"?id=".urlencode($_GET["id"])."\">", "divs" => [[
             "titulo" => "",
             "texto" => "Nombre de la sección: <input type=\"text\" name=\"nombre\"><br><input type=\"submit\" value=\"Editar sección\"></form>"
         ]]]];
