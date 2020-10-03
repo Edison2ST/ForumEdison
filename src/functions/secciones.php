@@ -59,7 +59,7 @@ class Seccion extends Usuario
         $stmt->execute();
         $id_seccion = $stmt->insert_id;
         $stmt = $this->mysqli->prepare("INSERT INTO ".$this->prefijo."seccion_registro(id,id_mod,nombre,eliminado,fecha,usuario) VALUES(?,1,?,0,'".date("Y-m-d H:i:s")."',?)");
-        $stmt->bind_param("iis", $id_seccion, $nombre, $this->id_usuario);
+        $stmt->bind_param("iss", $id_seccion, $nombre, $this->id_usuario);
         $stmt->execute();
         return true;
     }
