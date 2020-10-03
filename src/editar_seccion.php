@@ -10,7 +10,7 @@ elseif (isset($_GET["id"]))
     $resultado = $seccion->establecerSeccion($_GET["id"]);
     if ($resultado === false)
     {
-        $anuncio = ["Error al intentar establecer la sección", ""];
+        $anuncio = ["Error al intentar establecer la sección", $seccion->error];
         $contenidos = [];
     }
     else
