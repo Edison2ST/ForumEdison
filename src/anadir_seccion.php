@@ -13,8 +13,6 @@ else
         if ($resultado) $anuncio = ["Sección añadida exitosamente", ""];
         else $anuncio = ["Error al intentar añadir la sección", $seccion->error];
     }
-    $tipo_navbar = "rango1";
-    require_once "functions/navbar_preload.php";
     $contenidos = [["titulo" => "Añadir sección<form method=\"post\" action=\"?\">", "divs" => [[
         "titulo" => "",
         "texto" => "Nombre de la sección: <input type=\"text\" name=\"nombre\"><br><input type=\"submit\" value=\"Añadir sección\"></form>"
