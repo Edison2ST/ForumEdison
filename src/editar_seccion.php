@@ -30,7 +30,7 @@ elseif (isset($_GET["id"]))
         }
         $contenidos = [["titulo" => "Editar sección<form method=\"post\" action=\"?id=".urlencode($_GET["id"])."\">", "divs" => [[
             "titulo" => "",
-            "texto" => "Nombre de la sección: <input type=\"text\" name=\"nombre\" value=\"".htmlspecialchars($seccion->nombre)."\"><br><input type=\"hidden\" name=\"csrf_token\" value=\"".htmlspecialchars(generate_csrftoken())."\"><input type=\"submit\" value=\"Editar sección\"></form><form method=\"post\" action=\"?id=".urlencode($_GET["id"])."\">"
+            "texto" => "Nombre de la sección: <input type=\"text\" name=\"nombre\" value=\"".htmlspecialchars($seccion->seccion_nombre)."\"><br><input type=\"hidden\" name=\"csrf_token\" value=\"".htmlspecialchars(generate_csrftoken())."\"><input type=\"submit\" value=\"Editar sección\"></form><form method=\"post\" action=\"?id=".urlencode($_GET["id"])."\">"
         ],[
             "titulo" => "Eliminar la sección",
             "texto" => "Para confirmar que desea eliminar esta sección, introduzca el nombre actual de esta sección: <input type=\"text\" name=\"eliminar_nombre\"><input type=\"hidden\" name=\"csrf_token\" value=\"".htmlspecialchars(generate_csrftoken())."\"><input type=\"submit\" value=\"Eliminar sección\"></form>"

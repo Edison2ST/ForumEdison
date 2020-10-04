@@ -2,10 +2,10 @@
 require_once "usuario.php";
 class Seccion extends Usuario
 {
-    public $id;
-    public $nombre;
-    public $eliminado;
-    public $subforos;
+    public $seccion_id;
+    public $seccion_nombre;
+    public $seccion_eliminado;
+    public $seccion_subforos;
     public function listarTodasLasSecciones()
     {
         $consulta = $this->mysqli->query("SELECT id FROM ".$this->prefijo."seccion WHERE eliminado=0 ORDER BY id ASC");
@@ -33,10 +33,10 @@ class Seccion extends Usuario
         {
             $subforos[] = [$elemento2[0], $elemento2[1], 0];
         }
-        $this->id = $id;
-        $this->nombre = $elemento[0];
-        $this->eliminado = 0;
-        $this->subforos = $subforos;
+        $this->seccion_id = $id;
+        $this->seccion_nombre = $elemento[0];
+        $this->seccion_eliminado = 0;
+        $this->seccion_subforos = $subforos;
         return true;
     }
     public function listarTodo()
@@ -46,7 +46,7 @@ class Seccion extends Usuario
         foreach ($secciones as $seccion)
         {
             $this->establecerSeccion($seccion);
-            $resultado[] = [$this->id, $this->nombre, $this->eliminado, $this->subforos];
+            $resultado[] = [$this->seccion_id, $this->seccion_nombre, $this->seccion_eliminado, $this->seccion_subforos];
         }
         return $resultado;
     }
@@ -76,24 +76,24 @@ class Seccion extends Usuario
         if ($this->rango !== 2) return $this->establecerError("El usuario no posee los permisos suficientes para realizar esta acción");
         if (strlen($nombre) < 3 || strlen($nombre) > 30) return $this->establecerError("El nombre de la sección debe contener entre 3 y 30 caracteres");
         $stmt = $this->mysqli->prepare("UPDATE ".$this->prefijo."seccion SET nombre=? WHERE id=?");
-        $stmt->bind_param("si", $nombre, $this->id);
+        $stmt->bind_param("si", $nombre, $this->seccion_id);
         $stmt->execute();
         $next_idmod = $this->nextIdMod();
         $stmt = $this->mysqli->prepare("INSERT INTO ".$this->prefijo."seccion_registro(id,id_mod,nombre,eliminado,fecha,usuario) VALUES(?,?,?,0,'".date("Y-m-d H:i:s")."',?)");
-        $stmt->bind_param("iisi", $this->id, $next_idmod, $nombre, $this->id_usuario);
+        $stmt->bind_param("iisi", $this->seccion_id, $next_idmod, $nombre, $this->id_usuario);
         $stmt->execute();
         return true;
     }
     public function eliminarSeccion($nombre)
     {
         if ($this->rango !== 2) return $this->establecerError("El usuario no posee los permisos suficientes para realizar esta acción");
-        if ($nombre !== $this->nombre) return $this->establecerError("El nombre otorgado no coincide con el nombre de la sección (se distinguen mayúsculas y minúsculas)");
+        if ($nombre !== $this->seccion_nombre) return $this->establecerError("El nombre otorgado no coincide con el nombre de la sección (se distinguen mayúsculas y minúsculas)");
         $stmt = $this->mysqli->prepare("UPDATE ".$this->prefijo."seccion SET eliminado=1 WHERE id=?");
-        $stmt->bind_param("i", $this->id);
+        $stmt->bind_param("i", $this->seccion_id);
         $stmt->execute();
         $next_idmod = $this->nextIdMod();
         $stmt = $this->mysqli->prepare("INSERT INTO ".$this->prefijo."seccion_registro(id,id_mod,nombre,eliminado,fecha,usuario) VALUES(?,?,?,1,'".date("Y-m-d H:i:s")."',?)");
-        $stmt->bind_param("iisi", $this->id, $next_idmod, $nombre, $this->id_usuario);
+        $stmt->bind_param("iisi", $this->seccion_id, $next_idmod, $nombre, $this->id_usuario);
         $stmt->execute();
         return true;
     }
