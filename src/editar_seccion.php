@@ -28,6 +28,7 @@ elseif (isset($_GET["id"]))
             if ($resultado) $anuncio = ["Sección eliminada exitosamente", ""];
             else $anuncio = ["Error al intentar eliminar la sección", $seccion->error];
         }
+        $seccion->establecerSeccion($_GET["id"]); // Comprobar por cambios en caso de edición o eliminación de la sección
         $contenidos = [["titulo" => "Editar sección<form method=\"post\" action=\"?id=".urlencode($_GET["id"])."\">", "divs" => [[
             "titulo" => "",
             "texto" => "Nombre de la sección: <input type=\"text\" name=\"nombre\" value=\"".htmlspecialchars($seccion->seccion_nombre)."\"><br><input type=\"hidden\" name=\"csrf_token\" value=\"".htmlspecialchars(generate_csrftoken())."\"><input type=\"submit\" value=\"Editar sección\"></form><form method=\"post\" action=\"?id=".urlencode($_GET["id"])."\">"

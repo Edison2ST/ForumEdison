@@ -18,6 +18,10 @@ class Seccion extends Usuario
     }
     public function establecerSeccion($id)
     {
+        $this->seccion_id = NULL;
+        $this->seccion_nombre = NULL;
+        $this->seccion_eliminado = NULL;
+        $this->seccion_subforos = NULL;
         $stmt = $this->mysqli->prepare("SELECT nombre FROM ".$this->prefijo."seccion WHERE id=? AND eliminado=0 LIMIT 1");
         $stmt->bind_param("i", $id);
         $stmt->execute();
